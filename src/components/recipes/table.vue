@@ -1,63 +1,73 @@
 <template>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Source</th>
-            <th>No. Ingredients</th>
-            <th>Ingredient list</th>
-            <th>Instructions</th>
-            <th>Preparation Time</th>
-            <th>Actions</th>
-        </tr>
 
-        <tr v-for="recipe in recipes" :key="recipe.id">
-            <th>{{ recipe.id }}</th>
-            <th>{{ recipe.name }}</th>
-            <th>{{ recipe.source }}</th>
-            <th>{{ recipe.ingredients.length }}</th>
+        <tr>
+            <th>{{ id }}</th>
+            <th>{{ name }}</th>
+            <th>{{ source }}</th>
+            <th>{{ ingredients.length }}</th>
             <th>
-                <span v-for="(ingredient, index) in ingredientList(recipe.ingredients)" :key="ingredient.id">
-                    <span v-if="index !== ingredientList(recipe.ingredients).length - 1"> {{ ingredient.name }}, </span>
+                <span v-for="(ingredient, index) in ingredientList" :key="ingredient.id">
+                    <span v-if="index !== ingredientList.length - 1"> {{ ingredient.name }}, </span>
                     <span v-else> {{ ingredient.name }} </span>
                 </span>
             </th>
-            <th>{{ recipe.instructions }}</th>
-            <th>{{ recipe.preparation}}</th>
+            <th>{{ truncatedInstructions }}</th>
+            <th>{{ preparationTime }}</th>
             <th>Actions</th>
         </tr>
-    </table>
+
 </template>
 
 <script>
 export default {
     name: 'recipe-table',
 
-    props: ['recipes'],
+    props: ['id', 'name', 'source', 'ingredients', 'instructions', 'preparation'],
 
     data() {
         return {
-            tempList: []
+            tempIngredientList: this.ingredients,
+            instructionsStr: '',
+            prepStr: this.preparation
         }
     },
 
     methods: {
-        ingredientList(ingredients) {
-            if (ingredients.length >= 4) {
-                this.tempList = ingredients.slice(0, 4)
-                this.tempList.push({
-                    'name': '...'
-                })
-                return this.tempList
-            }
-
-            return ingredients
-        }
+       
     },
 
     computed: {
         truncatedInstructions: function() {
-            
+            if (this.instructions.length > 50) {
+                this.instructionsStr = this.instructions.substr(0, 50)
+
+                return this.instructionsStr.substr(0, Math.min(this.instructionsStr.length, this.instructionsStr.lastIndexOf(" "))) + "..."
+            }
+
+            return this.instructions
+        },
+
+        ingredientList: function() {
+            if (this.ingredients.length >= 4) {
+                this.tempIngredientList = this.ingredients.slice(0, 4)
+                this.tempIngredientList.push({
+                    'name': '...'
+                })
+
+                return this.tempIngredientList
+            }
+
+            return this.ingredients
+        },
+
+        preparationTime: function() {
+            this.prepStr = this.preparation.split(':')
+
+            if (parseInt(this.prepStr[0]) <= 0) {
+                return this.prepStr[1] + " Minutes"
+            }
+
+            return this.prepStr[0] + " Hours " + this.prepStr[1] + " Minutes"
         }
     }
 }
