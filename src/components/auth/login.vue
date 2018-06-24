@@ -87,7 +87,7 @@
         if (this.$route.query.redirect) {
           this.$router.push({ path: this.$route.query.redirect })
         } else {
-          this.$router.push({ name: 'dashboard' })
+          this.$router.push({ name: '/' })
         }
       },
       dealWithError (err) {
