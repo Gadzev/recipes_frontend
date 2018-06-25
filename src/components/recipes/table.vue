@@ -49,7 +49,7 @@ export default {
 
         ingredientList: function() {
             if (this.ingredients.length >= 4) {
-                this.tempIngredientList = this.ingredients.slice(0, 4)
+                this.tempIngredientList = this.ingredients.slice(0, 3)
                 this.tempIngredientList.push({
                     'name': '...'
                 })

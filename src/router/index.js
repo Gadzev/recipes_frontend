@@ -6,6 +6,7 @@ import auth from '../api/auth'
 import Guard from '../services/authMiddleware'
 
 import authRoutes from './auth'
+import recipeRoutes from './recipes'
 
 import Home from '@/components/home'
 
@@ -15,11 +16,16 @@ const router = new VueRouter({
     routes: [
         {
             path: '/',
+            redirect: '/home'
+        },
+        {
+            path: '/home',
             name: 'home',
             component: Home,
             beforeEnter: Guard.auth
         },
-        ...authRoutes
+        ...authRoutes,
+        ...recipeRoutes
     ]
 });
 
