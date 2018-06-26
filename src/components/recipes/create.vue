@@ -28,9 +28,10 @@
             <div class="input-container">
                 <div v-for="(ingredient, index) in ingredients" :key="index">
                     <label for="name">Ingredient</label>
-                    <multiselect v-model="ingredient.name" :options="ingredientOptions"></multiselect>
+                    <multiselect v-model="ingredient.name" :options="ingredientsUnique"></multiselect>
                     <label for="name">Quantity</label>
                     <input type="number" name="quantity" v-model="ingredient.quantity" v-validate="'required|min_value:1'">
+                    <button @click.stop.prevent="removeIngredient(index)">Remove</button>
                     <span v-show="errors.has('quantity')" class="input-error-msg">
                         {{ errors.first('quantity') }}
                     </span>
@@ -50,7 +51,7 @@
                 </textarea>
                 <span v-show="errors.has('instructions')" class="input-error-msg">
                         {{ errors.first('instructions') }}
-                    </span>
+                </span>
             </div>
 
             <button class="button button-success" @click.prevent="submit" @keyup.enter="submit">Submit</button>
@@ -64,6 +65,7 @@ import recipesAPI from '../../api/recipe'
 import Multiselect from 'vue-multiselect'
 import VueTimepicker from 'vue2-timepicker'
 import { getCookie } from 'tiny-cookie'
+import utils from '../../modules/utils.js'
 
 export default {
 
@@ -83,6 +85,7 @@ export default {
                     quantity: 1
                 }
             ],
+            ingredientValues: [],
             instructions: '',
             preparationTime: {
                 HH: "00",
@@ -136,12 +139,24 @@ export default {
                 name: 'FLOUR',
                 quantity: 1
                 })
+        },
+
+        removeIngredient(index) {
+            this.ingredients.splice(index, 1)
         }
     },
 
     computed: {
         formatPrepTime: function() {
             return this.preparationTime.HH + ":" + this.preparationTime.mm
+        },
+
+        ingredientsUnique: function() {
+            var tempArr = []
+            this.ingredients.forEach(function (item) {
+                tempArr.push(item.name)
+            })
+            return utils.arr_diff(tempArr, this.ingredientOptions)
         }
     }
 }
