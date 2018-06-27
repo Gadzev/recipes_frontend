@@ -7,5 +7,9 @@ export default {
 
     create (options) {
         return api('POST', '/recipes/create', options)
+    },
+
+    delete (options) {
+        return api('DELETE', `/recipes/${options.data.id}`, options)
     }
 }

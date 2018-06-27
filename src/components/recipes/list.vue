@@ -14,7 +14,7 @@
                 <th>Actions</th>
             </tr>
 
-            <recipe-table v-for="recipe in recipes" :key="recipe.id"
+            <recipe-table v-for="recipe in recipeList" :key="recipe.id"
                 :id="recipe.id"
                 :name="recipe.name"
                 :source="recipe.source"
@@ -25,14 +25,12 @@
             </recipe-table>
 
         </table>
-
-        <recipe-table :recipes="recipes"></recipe-table>
     </div>
     
 </template>
 
 <script>
-import recipeAPI from '../../api/recipe'
+import { mapGetters, mapActions } from 'vuex'
 import recipeTable from './table'
 
 export default {
@@ -41,22 +39,20 @@ export default {
         'recipe-table': recipeTable
     },
 
-    data() {
-        return {
-            recipes: []
-        }
+    methods: {
+        ...mapActions({
+            fetchRecipes: 'recipes/fetch'
+        })
+    },
+
+    computed: {
+        ...mapGetters({
+            recipeList: 'recipes/list'
+        })
     },
     
     mounted() {
-        recipeAPI.list({
-            success: (response) => {
-                console.log(response)
-                this.recipes = response.data.data
-            },
-            fail: (error) => {
-                console.log(error)
-            }
-        })
+        this.fetchRecipes()
     }
     
 }

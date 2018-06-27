@@ -13,12 +13,15 @@
             </th>
             <th>{{ truncatedInstructions }}</th>
             <th>{{ preparationTime }}</th>
-            <th>Actions</th>
+            <th><button @click="removeRecipe"> remove </button></th>
         </tr>
 
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import recipesAPI from '../../api/recipe'
+
 export default {
     name: 'recipe-table',
 
@@ -33,6 +36,23 @@ export default {
     },
 
     methods: {
+        ...mapActions({
+            fetchRecipes: 'recipes/fetch' 
+        }),
+
+        removeRecipe() {
+            recipesAPI.delete({
+                data: {
+                    id: this.id
+                },
+                success: (response) => {
+                    this.fetchRecipes()
+                },
+                fail: (err) => {
+                    console.log(err)
+                }
+            })
+        }
        
     },
 
