@@ -31,7 +31,18 @@ const actions = {
             },
             fail: err => {
                 console.log(err)
-                // TODO
+            }
+        })
+    },
+
+    removeRecipe ({commit, dispatch}, options) {
+        recipesAPI.delete({
+            id: options.id,
+            success: (response) => {
+                dispatch('fetch')
+            },
+            fail: (err) => {
+                console.log(err)
             }
         })
     }

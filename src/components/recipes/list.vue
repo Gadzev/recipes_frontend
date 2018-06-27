@@ -25,6 +25,7 @@
             </recipe-table>
 
         </table>
+  
     </div>
     
 </template>

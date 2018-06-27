@@ -20,5 +20,15 @@ export default {
             }
         
             return diff;
+        },
+        
+        preparationTime (preparation) {
+            var prepStr = preparation.split(':')
+
+            if (parseInt(prepStr[0]) <= 0) {
+                return prepStr[1] + " Minutes"
+            }
+
+            return prepStr[0] + " Hours " + prepStr[1] + " Minutes"
         }
     }

@@ -10,7 +10,7 @@ export default {
     },
 
     delete (options) {
-        return api('DELETE', `/recipes/${options.data.id}`, options)
+        return api('DELETE', `/recipes/${options.id}`, options)
     },
 
     get (options) {

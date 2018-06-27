@@ -24,6 +24,7 @@
 <script>
 import { mapActions } from 'vuex'
 import recipesAPI from '../../api/recipe'
+import utils from '../../modules/utils'
 
 export default {
     name: 'recipe-table',
@@ -40,20 +41,13 @@ export default {
 
     methods: {
         ...mapActions({
-            fetchRecipes: 'recipes/fetch' 
+            fetchRecipes: 'recipes/fetch',
+            remove: 'recipes/removeRecipe'
         }),
 
         removeRecipe() {
-            recipesAPI.delete({
-                data: {
-                    id: this.id
-                },
-                success: (response) => {
-                    this.fetchRecipes()
-                },
-                fail: (err) => {
-                    console.log(err)
-                }
+            this.remove({
+                id: this.id
             })
         }
        
@@ -84,13 +78,7 @@ export default {
         },
 
         preparationTime: function() {
-            this.prepStr = this.preparation.split(':')
-
-            if (parseInt(this.prepStr[0]) <= 0) {
-                return this.prepStr[1] + " Minutes"
-            }
-
-            return this.prepStr[0] + " Hours " + this.prepStr[1] + " Minutes"
+            return utils.preparationTime(this.preparation)
         }
     }
 }
