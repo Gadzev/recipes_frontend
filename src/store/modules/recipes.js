@@ -1,11 +1,13 @@
 import recipesAPI from '../../api/recipe.js'
 
 const state = {
-    recipes: null
+    recipes: null,
+    currentRecipe: null
 }
 
 const getters = {
-    list: state => state.recipes
+    list: state => state.recipes,
+    get: state => state.currentRecipe
 }
 
 const actions = {
@@ -19,12 +21,29 @@ const actions = {
                 // TODO
             }
         })
+    },
+
+    getRecipe ({commit}, options) {
+        recipesAPI.get({
+            id: options.data.id,
+            success: response => {
+                commit('SET_CURRENT_RECIPE', response.data.data)
+            },
+            fail: err => {
+                console.log(err)
+                // TODO
+            }
+        })
     }
 }
 
 const mutations = {
     UPDATE_RECIPES (state, recipes) {
         state.recipes = recipes
+    },
+
+    SET_CURRENT_RECIPE (state, recipe) {
+        state.currentRecipe = recipe
     }
 }
 

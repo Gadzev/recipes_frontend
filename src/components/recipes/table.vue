@@ -13,7 +13,10 @@
             </th>
             <th>{{ truncatedInstructions }}</th>
             <th>{{ preparationTime }}</th>
-            <th><button @click="removeRecipe"> remove </button></th>
+            <th>
+                <button @click="removeRecipe"> remove </button>
+                <router-link :to="{name: 'recipe', query: { recipeId: id }}">Details</router-link>
+            </th>
         </tr>
 
 </template>
