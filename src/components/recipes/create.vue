@@ -119,6 +119,7 @@ export default {
                 },
                 success: (response) => {
                     this.formError = null
+                    this.$toast.open('Recipe created!')
 
                     this.$router.push({name: 'home'})
                 },

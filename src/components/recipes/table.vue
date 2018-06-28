@@ -14,7 +14,7 @@
             <th>{{ truncatedInstructions }}</th>
             <th>{{ preparationTime }}</th>
             <th>
-                <img class="icon" src="../../assets/images/x-button.svg" @click="removeRecipe" />
+                <img class="icon" src="../../assets/images/x-button.svg" @click="confirmCustomDelete" />
                 <router-link :to="{name: 'recipe', query: { recipeId: id }}"><span class="details-ico icon"></span></router-link>
             </th>
         </tr>
@@ -48,6 +48,17 @@ export default {
         removeRecipe() {
             this.remove({
                 id: this.id
+            })
+            this.$toast.open('Recipe deleted!')
+        },
+
+        confirmCustomDelete() {
+            this.$dialog.confirm({
+                title: 'Deleting recipe',
+                message: 'Are you sure you want to <b>delete</b> this recipe? This action cannot be undone.',
+                confirmText: 'Delete Recipe',
+                type: 'is-danger',
+                onConfirm: () => this.removeRecipe()
             })
         }
        

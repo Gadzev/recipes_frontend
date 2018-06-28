@@ -24,7 +24,7 @@
                 </div>
                 <p> {{ preparationTime }} </p>
 
-                <button class="button button-danger full-width" @click="removeRecipe">Remove Recipe</button>
+                <button class="button button-danger full-width" @click="confirmCustomDelete">Remove Recipe</button>
 
             </div>
             <div class="column">
@@ -61,7 +61,18 @@ export default {
             this.remove({
                 id: this.id
             })
+            this.$toast.open('Recipe deleted!')
             this.$router.push({ name: 'home' })
+        },
+
+        confirmCustomDelete() {
+            this.$dialog.confirm({
+                title: 'Deleting recipe',
+                message: 'Are you sure you want to <b>delete</b> this recipe? This action cannot be undone.',
+                confirmText: 'Delete Recipe',
+                type: 'is-danger',
+                onConfirm: () => this.removeRecipe()
+            })
         }
     },
 
