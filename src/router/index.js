@@ -7,6 +7,7 @@ import authRoutes from './auth'
 import recipeRoutes from './recipes'
 
 import Home from '@/components/home'
+import NotFound from '@/components/common/404'
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ const router = new VueRouter({
             name: 'home',
             component: Home,
             beforeEnter: Guard.auth
+        },
+        {
+            path: '*',
+            name: '404',
+            component: NotFound
         },
         ...authRoutes,
         ...recipeRoutes

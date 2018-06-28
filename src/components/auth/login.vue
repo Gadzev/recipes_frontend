@@ -1,5 +1,5 @@
 <template>
-  <form id="loginForm">
+  <form id="loginForm" class="centered">
     <div class="message info" v-if="!formError && !authError && this.$route.query.redirect">
       Please log in to continue.
     </div>

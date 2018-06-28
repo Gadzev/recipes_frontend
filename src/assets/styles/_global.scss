@@ -39,6 +39,13 @@ body {
   color: #fff;
 }
 
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .center-text {
   text-align: center;
 }

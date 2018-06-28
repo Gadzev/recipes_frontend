@@ -22,12 +22,14 @@
                         </div>
                     </div>
                 </div>
-                <p> {{ preparationTime }} </p>
+                <br />
+                <p> <b> Preparation Time: </b> {{ preparationTime }} </p>
 
                 <button class="button button-danger full-width" @click="confirmCustomDelete">Remove Recipe</button>
 
             </div>
             <div class="column">
+                <h4> Instructions: </h4>
                 <p class="recipe-instructions"> {{ recipe.instructions }} </p>
             </div>
         </div>

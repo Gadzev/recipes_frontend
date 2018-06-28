@@ -45,7 +45,7 @@
             </div>
 
             <div class="input-container">
-                <textarea placeholder="Instructions here..." class="textarea full-width" name="instructions" v-model="instructions" v-validate="'required|min:6|max:128'" data-vv-as="instructions">
+                <textarea placeholder="Instructions here..." class="textarea full-width" name="instructions" v-model="instructions" v-validate="'required|min:6|max:1024'" data-vv-as="instructions">
 
                 </textarea>
                 <span v-show="errors.has('instructions')" class="input-error-msg">

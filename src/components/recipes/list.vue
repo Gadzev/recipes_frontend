@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="">
         <h1> Recipes </h1>
 
         <table class="table table-responsive">
