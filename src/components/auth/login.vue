@@ -11,7 +11,7 @@
     </div>
 
     <div class="auth error" v-if="authError">
-        {{ authError }}
+        {{ handleAuthFailed() }}
     </div>
 
     <div class="input-container">
@@ -49,6 +49,11 @@
     methods: {
       ...mapActions({
       }),
+      handleAuthFailed() {
+        this.$toast.open(this.authError)
+        this.formDisable = false
+        this.authError = false
+      },
       submit () {
         this.$validator.validateAll().then((result) => {
           if (!result) {
