@@ -1,25 +1,36 @@
 <template>
   <div id="app">
-    <h1> Home </h1>
-    <router-view></router-view>
+    <div class="recipes">
+      <sidebar></sidebar>
+      <div class="content">
+        <router-view></router-view>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-
+import Sidebar from '@/components/common/sidebar'
 
 export default {
-  name: 'app'
+  name: 'app',
+
+  components: {
+    'sidebar': Sidebar
+  }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+  @import './assets/styles/_global.scss';
+
+  .recipes {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  .content {
+    margin-left: $sidebar-width;
+  }
 </style>

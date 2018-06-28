@@ -1,0 +1,65 @@
+/**
+ * GLOBAL VARIABLES
+ */
+
+// COLORS
+$color-main:    #101418;
+$color-brand:   #18FF6D;
+
+
+$color-light:   #C5D0E1;
+$color-border:  #DFE2E5;
+
+$color-table-header: #7F8FA4;
+
+$color-background: #F7F7F7;
+
+$color-success: #35AC45;
+$color-info:    #356ADD;
+$color-danger:  #FE0000;
+$color-warning: #FFDD57;
+
+$color-white:   #FFFFFF;
+$color-smoke:   #F2F2F2;
+$color-dark:    #363636;
+$color-darker:  #101418;
+
+$colors: (
+  "success":    $color-success,
+  "info":       $color-info,
+  "danger":     $color-danger,
+  "warning":    $color-warning
+);
+
+@each $name, $color in $colors {
+  .text-#{$name} {
+    color: $color;
+  }
+  .bg-#{$name} {
+    background: $color;
+  }
+}
+
+// B&W SHADES
+$white: #FFFFFF;
+$dark: rgba(255, 255, 255, 0.3);
+$darker: rgba(0,0,0,0.2);
+
+// GLOBAL FONT VARIABLES
+$font-size-main: 14px;
+
+$font-size-small: 0.9rem;
+$font-size-normal: 1rem;
+$font-size-large: 1.25rem;
+$font-size-larger: 1.5rem;
+$font-size-largest: 2rem;
+
+$font-weight-normal: 400;
+$font-weight-semi: 600;
+$font-weight-strong: 700;
+
+// PADDING
+$pad: 20px;
+
+// SIDEBAR SIZE
+$sidebar-width: 230px;

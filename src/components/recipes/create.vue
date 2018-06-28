@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1> Create A New Post </h1>
+        <h1> Create A New Recipe </h1>
 
         <div class="message error" v-if="formError">
             <li v-for="error in formError" :key="error[0]['key']">
@@ -10,16 +10,14 @@
 
         <form id="create_recipe_form">
             <div class="input-container">
-                <label for="name">Name</label>
-                <input type="text" name="name" v-model="name" v-validate="'required|min:2'" data-vv-as="name">
+                <input type="text" placeholder="Name" class="input full-width" name="name" v-model="name" v-validate="'required|min:2'" data-vv-as="name">
                 <span v-show="errors.has('name')" class="input-error-msg">
                     {{ errors.first('name') }}
                 </span>
             </div>
 
             <div class="input-container">
-                <label for="name">Source</label>
-                <input type="text" name="source" v-model="source" v-validate="'url'" data-vv-as="source">
+                <input type="text" placeholder="Source" class="input full-width" name="source" v-model="source" v-validate="'url'" data-vv-as="source">
                 <span v-show="errors.has('source')" class="input-error-msg">
                     {{ errors.first('source') }}
                 </span>
@@ -27,16 +25,18 @@
 
             <div class="input-container">
                 <div v-for="(ingredient, index) in ingredients" :key="index">
-                    <label for="name">Ingredient</label>
-                    <multiselect v-model="ingredient.name" :options="ingredientsUnique"></multiselect>
-                    <label for="name">Quantity</label>
-                    <input type="number" name="quantity" v-model="ingredient.quantity" v-validate="'required|min_value:1'">
-                    <button @click.stop.prevent="removeIngredient(index)">Remove</button>
+                    <label name="ingredients">Ingredients</label>
+                    <multiselect class="ingredient" v-validate="'required'" data-vv-as="ingredient" name="ingredient" v-model="ingredient.name" :options="ingredientsUnique"></multiselect>
+                    <span v-show="errors.has('ingredient')" class="input-error-msg">
+                        {{ errors.first('ingredient') }}
+                     </span>
+                    <input type="number" placeholder="Quantity" class="input ingredient" name="quantity" v-model="ingredient.quantity" v-validate="'required|min_value:1'">
+                    <img class="icon ingredient-delete-ico" src="../../assets/images/x-button.svg" @click.stop.prevent="removeIngredient(index)" />
                     <span v-show="errors.has('quantity')" class="input-error-msg">
                         {{ errors.first('quantity') }}
                     </span>
                 </div>
-                <button @click.stop.prevent="addIngredient"> Add Ingredient </button>
+                <img class="icon add-ingredient-ico" src="../../assets/images/plus.svg" @click.stop.prevent="addIngredient" />
             </div>
 
             <div class="input-container">
@@ -45,8 +45,7 @@
             </div>
 
             <div class="input-container">
-                <label for="name">Instructions</label>
-                <textarea name="instructions" v-model="instructions" v-validate="'required|min:6|max:128'" data-vv-as="instructions">
+                <textarea placeholder="Instructions here..." class="textarea full-width" name="instructions" v-model="instructions" v-validate="'required|min:6|max:128'" data-vv-as="instructions">
 
                 </textarea>
                 <span v-show="errors.has('instructions')" class="input-error-msg">
@@ -81,7 +80,7 @@ export default {
             source: '',
             ingredients: [
                 {
-                    name: 'FLOUR',
+                    name: '',
                     quantity: 1
                 }
             ],
@@ -136,7 +135,7 @@ export default {
 
         addIngredient() {
             this.ingredients.push({
-                name: 'FLOUR',
+                name: '',
                 quantity: 1
                 })
         },
@@ -161,3 +160,23 @@ export default {
     }
 }
 </script>
+
+<style lang="scss">
+    .ingredient {
+        width: 90%;
+    }
+
+    .input .ingredient {
+        display: inline-block;
+    }
+
+    .ingredient-delete-ico {
+        margin-left: 20px;
+    }
+
+    .add-ingredient-ico {
+        margin: 10px;
+        width: 40px;
+        height: 40px;
+    }
+</style>

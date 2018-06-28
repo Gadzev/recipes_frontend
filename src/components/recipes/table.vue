@@ -14,8 +14,8 @@
             <th>{{ truncatedInstructions }}</th>
             <th>{{ preparationTime }}</th>
             <th>
-                <button @click="removeRecipe"> remove </button>
-                <router-link :to="{name: 'recipe', query: { recipeId: id }}">Details</router-link>
+                <img class="icon" src="../../assets/images/x-button.svg" @click="removeRecipe" />
+                <router-link :to="{name: 'recipe', query: { recipeId: id }}"><span class="details-ico icon"></span></router-link>
             </th>
         </tr>
 
@@ -85,5 +85,10 @@ export default {
 </script>
 
 <style lang="scss">
-
+    .details-ico {
+        background: url('../../assets/images/loupe.svg');
+        background-size: 20px 20px;
+        display: inline-block;
+        margin-left: 5px;
+    }
 </style>

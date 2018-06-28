@@ -4,23 +4,31 @@
             <div class="column">
                 <h1> {{ recipe.name }} </h1>
                 <p> {{ recipe.source }} </p>
+                <div class="columns">
+                    <div class="column">
+                        <h4> Ingredients: </h4>
+                    </div>
+                    <div class="column center-text">
+                        <h4> Quantity: </h4>
+                    </div>
+                </div>
                 <div v-for="ingredient in recipe.ingredients" :key="ingredient.id">
                     <div class="columns">
                         <div class="column">
                             {{ ingredient.name }}
                         </div>
-                        <div class="column">
-                            {{ ingredient.quantity }}
+                        <div class="column center-text">
+                             {{ ingredient.quantity }} 
                         </div>
                     </div>
                 </div>
                 <p> {{ preparationTime }} </p>
 
-                <button @click="removeRecipe">Remove</button>
+                <button class="button button-danger full-width" @click="removeRecipe">Remove Recipe</button>
 
             </div>
             <div class="column">
-                <p> {{ recipe.instructions }} </p>
+                <p class="recipe-instructions"> {{ recipe.instructions }} </p>
             </div>
         </div>
 
@@ -79,3 +87,7 @@ export default {
     }
 }
 </script>
+
+<style lang="scss">
+
+</style>

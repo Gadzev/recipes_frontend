@@ -2,7 +2,7 @@
     <div class="container">
         <h1> Recipes </h1>
 
-        <table>
+        <table class="table table-responsive">
             <tr>
                 <th>ID</th>
                 <th>Name</th>

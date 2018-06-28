@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import store from '../store'
-import auth from '../api/auth'
 import Guard from '../services/authMiddleware'
 
 import authRoutes from './auth'
@@ -16,7 +14,7 @@ const router = new VueRouter({
     routes: [
         {
             path: '/',
-            redirect: '/home'
+            redirect: {name: 'home'}
         },
         {
             path: '/home',
